@@ -88,7 +88,19 @@ function checkAnswer(currentLevel) {
       }, 1000);
   }
 } else {
-    console.log("wrong");
+  //  play this sound if the user got one of the answers wrong.
+  playSound('wrong');
+    
+  // apply class to the body when the user gets one of the answers wrong 
+    $('body').addClass('game-over');
+
+  // and then remove it after 200 milliseconds.
+    setTimeout(()=>{
+      $('body').removeClass('game-over');
+    }, 200);
+
+    // Change the h1 title if the user got the answer wrong
+    $('#level-title').text('Game Over, Press Any Key to Restart');
 }
 
 }

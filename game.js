@@ -2,8 +2,24 @@ let gamePattern = [];
 let buttonColours = ["red", "blue", "green", "yellow"];
 let userClickedPattern = [];
 
+//You'll need a way to keep track of whether if the game has started or not
+let started = false;
+
+//Create a new variable start at level 0.
+let level = 0;
+
+$(document).keypress(function() {
+  if (!started) {
+
+    //when the game has started, change this to say "Level 0".
+    $('#level-title').text(`Level ${level}`);
+    nextSequence();
+    started = true;
+  }
+  
+})
 // generate random number
-function getRandomNumberBetween(min,max){
+function getRandomNumberBetween(min,max) {
   return Math.floor(Math.random()*(max-min+1)+min);
 }
 
@@ -22,6 +38,9 @@ $(".btn").click(function() {
 
 function nextSequence() {
   
+  level+=1;
+  $('#level-title').text(`Level ${level}`);
+
   let randomNumber = getRandomNumberBetween(0,3);
   let randomChosenColour = buttonColours[randomNumber];
   gamePattern.push(randomChosenColour);
@@ -32,6 +51,7 @@ function nextSequence() {
   
   //To play the sound for the button colour selected. 
   playSound(randomChosenColour);
+  
  
 }
 
@@ -50,4 +70,5 @@ $(`#${currentColour}`).addClass('pressed');
    $(`#${currentColour}`).removeClass('pressed');
   }, 100);
 }
+
 nextSequence();

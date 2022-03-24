@@ -17,6 +17,7 @@ $(".btn").click(function() {
   userClickedPattern.push(userChosenColour);
 
   playSound(userChosenColour);
+  animatePress(userChosenColour);
 });
 
 function nextSequence() {
@@ -39,5 +40,14 @@ function playSound(name) {
 let audio = new Audio(`sounds/${name}.mp3`);
 audio.play();
 
+}
+
+function animatePress(currentColour) {
+  
+// Use jQuery to add this pressed class to the button 
+$(`#${currentColour}`).addClass('pressed');
+  setTimeout(()=>{
+   $(`#${currentColour}`).removeClass('pressed');
+  }, 100);
 }
 nextSequence();

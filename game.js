@@ -11,12 +11,12 @@ function getRandomNumberBetween(min,max){
 $(".btn").click(function() {
 
   //create a new variable to store the id of the button that got clicked.
-  var userChosenColour = $(this).attr("id");
+  let userChosenColour = $(this).attr("id");
 
   //Add the contents to the end of this new userClickedPattern
   userClickedPattern.push(userChosenColour);
 
-  console.log(userClickedPattern);
+  playSound(userChosenColour);
 });
 
 function nextSequence() {
@@ -30,9 +30,14 @@ function nextSequence() {
   $(`#${randomChosenColour}`).fadeIn(100).fadeOut(100).fadeIn(100);
   
   //To play the sound for the button colour selected. 
-  let audio = new Audio(`sounds/${randomChosenColour}.mp3`);
-   audio.play();
+  playSound(randomChosenColour);
  
 }
 
+function playSound(name) {
+
+let audio = new Audio(`sounds/${name}.mp3`);
+audio.play();
+
+}
 nextSequence();

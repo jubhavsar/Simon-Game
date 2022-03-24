@@ -31,14 +31,18 @@ $(".btn").click(function() {
 
   //Add the contents to the end of this new userClickedPattern
   userClickedPattern.push(userChosenColour);
+  checkAnswer(userClickedPattern.length-1);
 
   playSound(userChosenColour);
   animatePress(userChosenColour);
 });
 
 function nextSequence() {
+
+  //Once nextSequence() is triggered, reset the userClickedPattern to an empty array ready for the next level.
+  userClickedPattern = [];
   
-  level+=1;
+  level++;
   $('#level-title').text(`Level ${level}`);
 
   let randomNumber = getRandomNumberBetween(0,3);
@@ -71,4 +75,21 @@ $(`#${currentColour}`).addClass('pressed');
   }, 100);
 }
 
+function checkAnswer(currentLevel) {
+  if(userClickedPattern[currentLevel] === gamePattern[currentLevel]) {
+      console.log("success");
+
+    //If the user got the most recent answer right in step 3, then check that they have finished their sequence with another if statement.
+    if (userClickedPattern.length === gamePattern.length){
+
+    //Call nextSequence() after a 1000 millisecond delay.
+      setTimeout(function () {
+        nextSequence();
+      }, 1000);
+  }
+} else {
+    console.log("wrong");
+}
+
+}
 nextSequence();

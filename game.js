@@ -77,7 +77,6 @@ $(`#${currentColour}`).addClass('pressed');
 
 function checkAnswer(currentLevel) {
   if(userClickedPattern[currentLevel] === gamePattern[currentLevel]) {
-      console.log("success");
 
     //If the user got the most recent answer right in step 3, then check that they have finished their sequence with another if statement.
     if (userClickedPattern.length === gamePattern.length){
@@ -101,7 +100,16 @@ function checkAnswer(currentLevel) {
 
     // Change the h1 title if the user got the answer wrong
     $('#level-title').text('Game Over, Press Any Key to Restart');
+
+    //Call startOver() if the user gets the sequence wrong.
+    startOver();
 }
 
+}
+
+function startOver() {
+  level = 0;
+  gamePattern = [];
+  started = false;
 }
 nextSequence();
